@@ -18,7 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     # path('planner/', include('planner.urls')),
-    path('', include('frontendreact.urls')),
+    path('', include('reactjs.urls')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
 ]
