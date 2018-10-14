@@ -13,6 +13,11 @@ const host = process.env.HOST || '0.0.0.0';
 
 module.exports = function(proxy, allowedHost) {
   return {
+    // add wildcard in this header item to 
+    // allow serving to other port in the same device
+    headers: {
+      'Access-Control-Allow-Origin': '*'
+    },
     // WebpackDevServer 2.4.3 introduced a security fix that prevents remote
     // websites from potentially accessing local content through DNS rebinding:
     // https://github.com/webpack/webpack-dev-server/issues/887

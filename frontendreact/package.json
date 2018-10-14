@@ -106,5 +106,8 @@
     "presets": [
       "react-app"
     ]
+  },
+  "devDependencies": {
+    "webpack-bundle-tracker": "^0.4.2-beta"
   }
 }

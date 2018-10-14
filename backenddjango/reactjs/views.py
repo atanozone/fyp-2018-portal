@@ -5,4 +5,4 @@ from django.shortcuts import render
 #render() finds template/ directory
 #redirect all request to appdirectory/template/frontendreact/index.html
 def index(request):
-    return render(request, 'reactjs/index.html')
+    return render(request, 'index.html')
