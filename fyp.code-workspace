@@ -3,5 +3,9 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"settings": {
+		"python.venvPath": "${workspaceFolder}/envs/",
+		"python.pythonPath": "/Users/ozon/git/fyp-2018-portal/envs/djangodev/bin/python3.7"
+	}
 }
