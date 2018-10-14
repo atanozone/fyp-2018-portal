@@ -86,19 +86,17 @@ module.exports = {
     // Note: instead of the default WebpackDevServer client, we use a custom one
     // to bring better experience for Create React App users. You can replace
     // the line below with these two lines if you prefer the stock client:
-    // require.resolve('webpack-dev-server/client') + '?/',
-    // require.resolve('webpack/hot/dev-server'),
-    require.resolve('react-dev-utils/webpackHotDevClient'),
+    // [changed] 
+    require.resolve('webpack-dev-server/client') + '?http://localhost:3000',
+    require.resolve('webpack/hot/dev-server'),
+    //require.resolve('react-dev-utils/webpackHotDevClient'),
+
     // Finally, this is your app's code:
     paths.appIndexJs,
     // We include the app code last so that if there is a runtime error during
     // initialization, it doesn't blow up the WebpackDevServer client, and
     // changing JS code would still trigger a refresh.
 
-    //allow django webpack server to serve at this path (same as publicPath)
-    require.resolve('webpack-dev-server/client') + '?http://localhost:3000',
-    require.resolve('webpack/hot/dev-server'),
-    // require.resolve('react-dev-utils/webpackHotDevClient'),
   ],
   output: {
     // Add /* filename */ comments to generated require()s in the output.
