@@ -11,26 +11,24 @@ const range = len => {
   return arr;
 };
 
-const newPerson = () => {
-  const statusChance = Math.random();
+const OneWeek = (week) => {
   return {
-    firstName: namor.generate({ words: 1, numbers: 0 }),
-    lastName: namor.generate({ words: 1, numbers: 0 }),
-    age: Math.floor(Math.random() * 30),
-    visits: Math.floor(Math.random() * 100),
-    progress: Math.floor(Math.random() * 100),
-    status:
-      statusChance > 0.66
-        ? "relationship"
-        : statusChance > 0.33 ? "complicated" : "single"
+    weekNo: week,
+    Monday: Math.floor(Math.random() * 100),
+    Tuesday: Math.floor(Math.random() * 100),
+    Wednesday: Math.floor(Math.random() * 30),
+    Thurday: Math.floor(Math.random() * 100),
+    Friday: Math.floor(Math.random() * 100),
+    Saturday: namor.generate({ words: 1, numbers: 0 }),
+    Sunday: namor.generate({ words: 1, numbers: 0 })
   };
 };
 
-export function makeData(len = 5553) {
+export function makeData(len = 17) {
   return range(len).map(d => {
     return {
-      ...newPerson(),
-      children: range(10).map(newPerson)
+      ...OneWeek(d),
+      children: range(10).map(OneWeek)
     };
   });
 }

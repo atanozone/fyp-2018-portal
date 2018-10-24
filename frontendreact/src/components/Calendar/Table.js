@@ -6,7 +6,7 @@ import { makeData, Logo, Tips } from "./Utils";
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-class OneWeek extends React.Component {
+class OneDay extends React.Component {
   constructor(props) {
   super(props);
   this.state = {
@@ -24,6 +24,8 @@ render() {
   );
 }
 }
+
+
 class CalendarTable extends React.Component {
   constructor() {
     super();
@@ -37,50 +39,91 @@ class CalendarTable extends React.Component {
       <div>
         <ReactTable
           data={data}
-          columns={[
+          columns={[{
+      Header: '',
+      columns: [{
+        Header: 'Week',
+        accessor: 'weekNo'
+      }
+      ]
+    }, {
+      Header: 'Day',
+      columns: [{
+        Header: 'Mon',
+        accessor: 'Monday',
+        Cell: row => (
+          <span>
             {
-              Header: "Name",
-              columns: [
-                {
-                  Header: "First Name",
-                  accessor: "firstName"
-                },
-                {
-                  Header: "Last Name",
-                  id: "lastName",
-                  accessor: d => d.lastName
-                }
-              ]
-            },
-            {
-              Header: "Info",
-              columns: [
-                {
-                  Header: "Age",
-                  accessor: "age"
-                },
-                {
-                  Header: "Status",
-                  accessor: "status"
-                }
-              ]
-            },
-            {
-              Header: 'Stats',
-              columns: [
-                {
-                  Header: "Visits",
-                  accessor: "visits"
-                }
-              ]
+              row.value 
             }
-          ]}
-          defaultPageSize={10}
+          </span>
+        )
+      }, {
+        Header: 'Tue',
+        accessor: 'Tuesday',
+        Cell: row => (
+          <span>
+            {
+              row.value 
+            }
+          </span>
+        )
+      },{
+        Header: 'Wed',
+        accessor: 'Wednesday',
+        Cell: row => (
+          <span>
+            {
+              row.value 
+            }
+          </span>
+        )
+      },{
+        Header: 'Thu',
+        accessor: 'Thursday',
+        Cell: row => (
+          <span>
+            {
+              row.value 
+            }
+          </span>
+        )
+      },{
+        Header: 'Fri',
+        accessor: 'Friday',
+        Cell: row => (
+          <span>
+            {
+              row.value 
+            }
+          </span>
+        )
+      },{
+        Header: 'Sat',
+        accessor: 'Saturday',
+        Cell: row => (
+          <span>
+            {
+              row.value 
+            }
+          </span>
+        )
+      },{
+        Header: 'Sun',
+        accessor: 'Sunday',
+        Cell: row => (
+          <span>
+            {
+              row.value 
+            }
+          </span>
+        )
+      }]
+    }]}
+          defaultPageSize={17}
           className="-striped -highlight"
         />
         <br />
-        <Tips />
-        <Logo />
       </div>
     );
   }
