@@ -3,49 +3,99 @@ import React from "react";
 import namor from "namor";
 //import "./index.css";
 
-const range = len => {
+ const range = len => {
   const arr = [];
-  for (let i = 0; i < len; i++) {
+  for (let i = 1; i <= len; i++) {
     arr.push(i);
   }
   return arr;
 };
-
-const OneWeek = (week) => {
+ const MapDay = (week,day,data)=>{
+  var i =0;
+  for(i=0;i<data.length;i++){
+    if ((data[i].week_number == week) && (data[i].day_number==day)){
+      return {
+        title:data[i].title,
+        description:data[i].description
+      }
+    }
+  }
   return {
-    weekNo: week,
-    Monday: Math.floor(Math.random() * 100),
-    Tuesday: Math.floor(Math.random() * 100),
-    Wednesday: Math.floor(Math.random() * 30),
-    Thurday: Math.floor(Math.random() * 100),
-    Friday: Math.floor(Math.random() * 100),
-    Saturday: namor.generate({ words: 1, numbers: 0 }),
-    Sunday: namor.generate({ words: 1, numbers: 0 })
-  };
-};
+    title:'',
+    description:''
+  }
+}
+const OneWeek=(d)=> {
+  return {
+      weekNo:d,
+      Monday:{
+        title:'',
+        description:'',
+      },
+      Tuesday:{
+        title:'',
+        description:'',
+      },
+      Wednesday:{
+        title:'',
+        description:'',
+      },
+      Thursday:{
+        title:'',
+        description:'',
+      },
+      Friday:{
+        title:'',
+        description:'',
+      },
+      Saturday:{
+        title:'',
+        description:'',
+      },
+      Sunday:{
+        title:'',
+        description:'',
+      },
+  }
+}
+ const MapWeek = (d,data)=>{
+  const temp ={
+      weekNo: d,
+      Monday: {...MapDay(d,1,data)},
+      Tuesday: {...MapDay(d,2,data)},
+      Wednesday: {...MapDay(d,3,data)},
+      Thursday: {...MapDay(d,4,data)},
+      Friday: {...MapDay(d,5,data)},
+      Saturday: {...MapDay(d,6,data)},
+      Sunday: {...MapDay(d,7,data)},
+  }
+  console.log("mappedweek",temp);
+  return temp;
+}
 
-export function makeData(len = 17) {
-  return range(len).map(d => {
-    return {
-      ...OneWeek(d),
-      children: range(10).map(OneWeek)
+export function MapSemester(data, len =17){
+    return range(len).map(d => {
+      return {
+        ...MapWeek(d,data),
     };
   });
 }
-
-export const Logo = () =>
-  <div style={{ margin: '1rem auto', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center'}}>
-    For more examples, visit {''}
-  <br />
-    <a href="https://github.com/react-tools/react-table" >
-      <img
-        src="https://github.com/react-tools/media/raw/master/logo-react-table.png"
-        style={{ width: `150px`, margin: ".5em auto .3em" }}
-      />
-    </a>
-  </div>;
-
-export const Tips = () =>
-  <div style={{ textAlign: "center" }}>
-    <em>Tip: Hold shift when sorting to multi-sort!</em>
-  </div>;
+export function getRequest(){ 
+  return fetch('http://127.0.0.1:8000/planner/api/')
+  .then(response => {
+    var responseJson = response.json();
+    console.log("response object",responseJson)
+    return responseJson;
+  })
+  .then(body => {
+    console.log("body",body);
+    return body;
+  })
+}
+export function makeData(len = 17){
+  return range(len).map(d => {
+    return {
+      ...OneWeek(d),
+  };
+});
+}
