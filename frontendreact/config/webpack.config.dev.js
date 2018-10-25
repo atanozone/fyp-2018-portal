@@ -118,12 +118,15 @@ module.exports = {
     // https://twitter.com/wSokra/status/969633336732905474
     // https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366
     splitChunks: {
-      chunks: 'all',
-      name: false,
+      // [changed] default 'all'
+      chunks: 'async',
+      // [changed] default 'false'
+      name: true,
     },
     // Keep the runtime chunk seperated to enable long term caching
     // https://twitter.com/wSokra/status/969679223278505985
-    runtimeChunk: true,
+    // [changed] default boolean true, not object
+    runtimeChunk: false
   },
   resolve: {
     // This allows you to set a fallback for where Webpack should look for modules.

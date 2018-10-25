@@ -1,86 +1,163 @@
 import React from "react";
 import { render } from "react-dom";
-import { makeData, Logo, Tips } from "./Utils";
 
 // Import React Table
 import ReactTable from "react-table";
 import "react-table/react-table.css";
 
-class OneWeek extends React.Component {
+//Import Custom
+import { MapSemester, getRequest } from "./Utils";
+import "./Planner.css";
+
+class OneDay extends React.Component {
   constructor(props) {
   super(props);
   this.state = {
-    value: null,
+    overview:[{
+      title: null,
+      description:null,
+    }],
   };
 }
 render() {
+  if (this.props.overview.title!='')
   return (
-    <button
-      className="square"
-      onClick={() => this.props.onClick()}
-    >
-      {this.props.value}
-    </button>
+    <div>
+    <div
+      className="oneday">
+      <p>Title: {this.props.overview.title}</p>
+      <p>Description: {this.props.overview.description}</p>
+    </div>
+    <button>Update [POST,DELETE]</button>
+    </div>
   );
+  else return (
+  <div>
+    <button>Create [POST]</button>
+  </div>
+  )
 }
 }
+
+
 class CalendarTable extends React.Component {
   constructor() {
     super();
     this.state = {
-      data: makeData()
+      data: [],
+      loading: true
     };
+    this.fetchData=this.fetchData.bind(this);
   }
+  fetchData(state,instance){
+    this.setState({loading:true});
+    getRequest().then((result) =>{
+      console.log(result);
+      var mappedresult = MapSemester(result);
+
+      this.setState({
+        data:mappedresult,
+        loading:false
+      });
+
+    });
+  }
+
   render() {
-    const { data } = this.state;
     return (
       <div>
         <ReactTable
-          data={data}
-          columns={[
-            {
-              Header: "Name",
-              columns: [
-                {
-                  Header: "First Name",
-                  accessor: "firstName"
-                },
-                {
-                  Header: "Last Name",
-                  id: "lastName",
-                  accessor: d => d.lastName
-                }
-              ]
-            },
-            {
-              Header: "Info",
-              columns: [
-                {
-                  Header: "Age",
-                  accessor: "age"
-                },
-                {
-                  Header: "Status",
-                  accessor: "status"
-                }
-              ]
-            },
-            {
-              Header: 'Stats',
-              columns: [
-                {
-                  Header: "Visits",
-                  accessor: "visits"
-                }
-              ]
-            }
-          ]}
-          defaultPageSize={10}
-          className="-striped -highlight"
+        
+          data={this.state.data}
+          loading={this.state.loading}
+          onFetchData={this.fetchData}
+          columns={[{
+            
+      Header: 'Week',
+      
+      columns: [{
+        Header: '',
+        accessor: 'weekNo',
+        className:'matrixHeader',
+        
+        Cell: row=>(
+          <span >
+            {"Week "+row.value}
+          </span>
+        )
+      }
+      ]
+    }, {
+      Header: 'Day',
+      columns: [{
+        id:'Monday',
+        Header: 'Mon',
+        accessor: d=>d.Monday.title,
+        headerClassName:'matrixHeader',
+        Cell: row=>(
+          <OneDay overview={row.original.Monday}/>
+        )
+      }, {
+        id:'Tuesday',
+        Header: 'Tue',
+        accessor: d=>d.Tuesday.title,
+        headerClassName:'matrixHeader',
+        Cell: row=>(
+          <OneDay overview={row.original.Tuesday}/>
+        )
+      },{
+        id:'Wednesday',
+        Header: 'Wed',
+        accessor: d=>d.Wednesday.title,
+        headerClassName:'matrixHeader',
+        Cell: row=>(
+          <OneDay overview={row.original.Wednesday}/>
+        )
+      },{
+        id:'Thursday',
+        Header: 'Thu',
+        accessor: d=>d.Thursday.title,
+        headerClassName:'matrixHeader',
+        Cell: row=>(
+          <OneDay overview={row.original.Thursday}/>
+        )
+      },{
+        id:'Friday',
+        Header: 'Fri',
+        accessor: d=>d.Friday.title,
+        headerClassName:'matrixHeader',
+        Cell: row=>(
+          <OneDay overview={row.original.Friday}/>
+        )
+      },{
+        id:'Saturday',
+        Header: 'Sat',
+        accessor: d=>d.Saturday.title,
+        headerClassName:'matrixHeader',
+        Cell: row=>(
+          <OneDay overview={row.original.Saturday}/>
+        )
+      },{
+        id:'Sunday',
+        Header: 'Sun',
+        accessor: d=>d.Sunday.title,
+        headerClassName:'matrixHeader',
+        Cell: row=>(
+          <OneDay overview={row.original.Sunday}/>
+        )
+      }]
+    }]}
+          defaultPageSize={17}
+          className="-striped -highlight"   
+          // Override table default
+      sortable= {false} 
+      resizable= {false} 
+      filterable= {false} 
+      showPagination= {false}
+      showPaginationBottom= {false}
+      showPageSizeOptions= {false}   
         />
         <br />
-        <Tips />
-        <Logo />
       </div>
     );
   }
