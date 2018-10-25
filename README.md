@@ -27,14 +27,28 @@ Initialise virtual environment
 source envs/djangodev/bin/activate
 ```
 
+Python Dependencies(in case you make yourself)
+1. django
+2. djangorestframework
+3. django-webpack-builder
+4. pymysql
+5. django-cors-headers
+6. pylint
+
+
 ### create the backend project (if not done)
 
 ```bash
 django-admin startproject backenddjango
 ```
 ### manage.py initialise the dev server
+dev
 ```bash
 python manage.py runserver
+```
+prod emulate
+```bash
+python manage.py runserver --setting=backenddjango.prod_settings
 ```
 
 Backend folder has “app” directories (/polls, /api) and the ports
