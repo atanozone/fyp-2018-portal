@@ -25,15 +25,19 @@ render() {
     <div>
     <div
       className="oneday">
+      <h3>Meeting</h3>
       <p>Title: {this.props.overview.title}</p>
       <p>Description: {this.props.overview.description}</p>
     </div>
-    <button>Update [POST,DELETE]</button>
+    <button>Update [placeholder]</button><br/>
+    <button>Create [placeholder]</button>
+
     </div>
   );
   else return (
-  <div>
-    <button>Create [POST]</button>
+  <div style={{textAlign: 'center'}}>
+    <span>no events</span><br/>
+    <button>Create [placeholder]</button>
   </div>
   )
 }
