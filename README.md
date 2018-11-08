@@ -19,15 +19,27 @@ I suggest reading up on
 as you go along
 
 ## Getting Started (UNDER CONSTRUCTION):
-cd to fyp-portal
 
-### Backend side
-Initialise virtual environment
+The entire project will consists of the Django backend setup and React frontend setup.
+
+Firstly, initialize the project main folder directory, this is where all of your stuffs will be stored. You can create folder in any file viewer or use mkdir.
+Navigate into the project file.
+
 ```terminal
-source envs/djangodev/bin/activate
+mkdir fyp-portal
+cd fyp-portal
 ```
 
-Python Dependencies(in case you make yourself)
+### Backend side Django
+
+Now we will initize the python environment and Django project. I suggest reading up on virtual environment, pip and python in general. The Django page provides an excellent documentation on these topics, i suggest reading them. 
+https://docs.djangoproject.com/en/2.1/topics/install/
+
+```terminal
+
+```
+
+Python Dependencies
 1. django
 2. djangorestframework
 3. django-webpack-builder

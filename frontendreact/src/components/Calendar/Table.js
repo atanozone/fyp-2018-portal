@@ -8,6 +8,7 @@ import "react-table/react-table.css";
 //Import Custom
 import { MapSemester, getRequest } from "./Utils";
 import "./Planner.css";
+import OneMeeting from "./Meeting"
 
 class OneDay extends React.Component {
   constructor(props) {
@@ -20,26 +21,38 @@ class OneDay extends React.Component {
   };
 }
 render() {
-  if (this.props.overview.title!='')
+  var temparray=this.props.overview;
+  var keys = Object.keys(temparray);
+  if (temparray === undefined || keys.length == 0){
   return (
+    <div style={{textAlign: 'center'}}>
+    <span>no events</span><br/>
+  </div>
+  );
+  }
+  else {
+    return (
     <div>
-    <div
-      className="oneday">
-      <h3>Meeting</h3>
-      <p>Title: {this.props.overview.title}</p>
-      <p>Description: {this.props.overview.description}</p>
-    </div>
-    <button>Update [placeholder]</button><br/>
-    <button>Create [placeholder]</button>
-
+    <OneMeeting overview={this.props.overview}/>
     </div>
   );
-  else return (
-  <div style={{textAlign: 'center'}}>
-    <span>no events</span><br/>
-    <button>Create [placeholder]</button>
-  </div>
-  )
+  }
+}
+}
+class OneItem extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {
+    overview:[{
+      title: null,
+      description:null,
+    }],
+  };
+}
+render() {
+  return (
+    <OneMeeting overview={this.props.overview}/>
+  );
 }
 }
 
