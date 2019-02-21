@@ -4,12 +4,53 @@ import { render } from "react-dom";
 import {Button,List,Popover} from 'antd';
 
 const content = (
-  <div>
-    <p>This is a custom HTML popup</p>
-  </div>
+  {
+    overview:{
+      title: null,
+      description:null,
+    }
+  }
 );
-
+class PopContent extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {
+    content,
+  };
+}
+//should put <popover> and <button> in title
+render() {
+    const data = this.props.overview;
+    console.log('popover:',data);
+    return(
+    <div>
+      <p>{data.description}</p>
+  </div>
+    );
+}
+}
 class OneMeeting extends React.Component {
+  constructor(props) {
+  super(props);
+  this.state = {
+    content,
+  };
+}
+//should put <popover> and <button> in title
+render() {
+    const data = this.props.overview;
+    console.log('onemeeting:',data);
+    return(
+    <div>
+      <Popover overview = {<PopContent overview={data}/>} title={data.title} trigger='click'>
+      <Button>{data.title}</Button>
+      </Popover>
+  </div>
+    );
+}
+}
+
+class AllMeeting extends React.Component {
     constructor(props) {
     super(props);
     this.state = {
@@ -21,19 +62,16 @@ class OneMeeting extends React.Component {
   }
   //should put <popover> and <button> in title
   render() {
-      console.log('Test:',this.props.overview);
-      const data = this.props.overview;
+      const data = Object.values(this.props.overview);
       return(
       <div>
-        {console.log('data2:',data)}
       <List
     itemLayout="horizontal"
     dataSource={data} 
     renderItem={item => (
       <List.Item>
         <List.Item.Meta
-          title={<a href="">{item.title}</a>}
-          description={item.description}
+          title={<OneMeeting overview={item}/>}
         />
       </List.Item>
     )}
@@ -43,4 +81,4 @@ class OneMeeting extends React.Component {
   }
   }
 
-  export default OneMeeting;
+  export default AllMeeting;

@@ -8,7 +8,7 @@ import "react-table/react-table.css";
 //Import Custom
 import { MapSemester, getRequest } from "./Utils";
 import "./Planner.css";
-import OneMeeting from "./Meeting"
+import AllMeeting from "./Meeting"
 
 class OneDay extends React.Component {
   constructor(props) {
@@ -21,9 +21,9 @@ class OneDay extends React.Component {
   };
 }
 render() {
-  var temparray=this.props.overview;
-  var keys = Object.keys(temparray);
-  if (temparray === undefined || keys.length == 0){
+  var objarr=this.props.overview;
+  var keys = Object.keys(objarr);
+  if (objarr === undefined || keys.length == 0){
   return (
     <div style={{textAlign: 'center'}}>
     <span>no events</span><br/>
@@ -31,31 +31,16 @@ render() {
   );
   }
   else {
+    //this obj to arr method only works on modern browser, may need to switch to key.map
+    const data = Object.values(objarr);
     return (
-    <div>
-    <OneMeeting overview={this.props.overview}/>
-    </div>
+      <div>
+        <AllMeeting overview={data}/>
+  </div>
   );
   }
 }
 }
-class OneItem extends React.Component {
-  constructor(props) {
-  super(props);
-  this.state = {
-    overview:[{
-      title: null,
-      description:null,
-    }],
-  };
-}
-render() {
-  return (
-    <OneMeeting overview={this.props.overview}/>
-  );
-}
-}
-
 
 class CalendarTable extends React.Component {
   constructor() {
@@ -79,7 +64,6 @@ class CalendarTable extends React.Component {
 
     });
   }
-
   render() {
     return (
       <div>
