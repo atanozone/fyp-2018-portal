@@ -8,6 +8,7 @@ import "react-table/react-table.css";
 //Import Custom
 import { MapSemester, getRequest } from "./Utils";
 import "./Planner.css";
+import AllMeeting from "./Meeting"
 
 class OneDay extends React.Component {
   constructor(props) {
@@ -20,25 +21,26 @@ class OneDay extends React.Component {
   };
 }
 render() {
-  if (this.props.overview.title!='')
+  var objarr=this.props.overview;
+  var keys = Object.keys(objarr);
+  if (objarr === undefined || keys.length == 0){
   return (
-    <div>
-    <div
-      className="oneday">
-      <p>Title: {this.props.overview.title}</p>
-      <p>Description: {this.props.overview.description}</p>
-    </div>
-    <button>Update [POST,DELETE]</button>
-    </div>
-  );
-  else return (
-  <div>
-    <button>Create [POST]</button>
+    <div style={{textAlign: 'center'}}>
+    <span>no events</span><br/>
   </div>
-  )
+  );
+  }
+  else {
+    //this obj to arr method only works on modern browser, may need to switch to key.map
+    const data = Object.values(objarr);
+    return (
+      <div>
+        <AllMeeting overview={data}/>
+  </div>
+  );
+  }
 }
 }
-
 
 class CalendarTable extends React.Component {
   constructor() {
@@ -62,7 +64,6 @@ class CalendarTable extends React.Component {
 
     });
   }
-
   render() {
     return (
       <div>

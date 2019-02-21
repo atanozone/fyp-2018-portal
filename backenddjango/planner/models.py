@@ -31,12 +31,10 @@ class EventDate(models.Model):
     week_number = models.IntegerField(choices = WEEKCHOICE,default = 1)
     day_number = models.IntegerField(choices = DAYCHOICE,default = 1)
 
-    
-
 class Meeting(models.Model):
     def __str__(self):
         return self.title
-    EventDate = models.OneToOneField(
+    EventDate = models.ForeignKey(
         EventDate, 
         on_delete=models.CASCADE, 
         primary_key=True

@@ -375,7 +375,7 @@ module.exports = {
       publicPath: publicPath,
     }),
 
-    //Generate new BundleTracker at the fyp-2018-portal directory
+    //Generate new BundleTracker at the backenddjango directory
     new BundleTracker({path: paths.statsRoot, filename: 'webpack-stats.dev.json'}),
 
   ],

@@ -10,53 +10,24 @@ import namor from "namor";
   }
   return arr;
 };
+
+//connect external title to api title
  const MapDay = (week,day,data)=>{
+   var temp=[];
+   const empty ={
+     title:'',
+     description:''
+    }
   var i =0;
   for(i=0;i<data.length;i++){
     if ((data[i].week_number == week) && (data[i].day_number==day)){
-      return {
+      temp.push({
         title:data[i].title,
         description:data[i].description
-      }
+      });
     }
   }
-  return {
-    title:'',
-    description:''
-  }
-}
-const OneWeek=(d)=> {
-  return {
-      weekNo:d,
-      Monday:{
-        title:'',
-        description:'',
-      },
-      Tuesday:{
-        title:'',
-        description:'',
-      },
-      Wednesday:{
-        title:'',
-        description:'',
-      },
-      Thursday:{
-        title:'',
-        description:'',
-      },
-      Friday:{
-        title:'',
-        description:'',
-      },
-      Saturday:{
-        title:'',
-        description:'',
-      },
-      Sunday:{
-        title:'',
-        description:'',
-      },
-  }
+  return temp;
 }
  const MapWeek = (d,data)=>{
   const temp ={
@@ -88,14 +59,8 @@ export function getRequest(){
     return responseJson;
   })
   .then(body => {
-    console.log("body",body);
+    console.log("response body",body);
     return body;
   })
 }
-export function makeData(len = 17){
-  return range(len).map(d => {
-    return {
-      ...OneWeek(d),
-  };
-});
-}
+
